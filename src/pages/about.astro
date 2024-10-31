@@ -1,0 +1,58 @@
+---
+// import { getImage } from 'astro:assets';
+// import Features2 from '~/components/widgets/Features2.astro';
+// import Features3 from '~/components/widgets/Features3.astro';
+import GalleryIndex from '~/components/widgets/GalleryIndex.astro';
+import Hero from '~/components/widgets/Hero.astro';
+//import Stats from '~/components/widgets/Stats.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'About us',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="About us"
+    image={{
+      src: '~/assets/images/gallery/PICTURE5.png',
+      alt: 'Student using metal grinder',
+    }}
+  >
+    <Fragment slot="title">
+      We Build Robots
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Huntington Robotics was established in 2013 as a high school robotics team based out of Huntington, New York.
+      Its purpose is to provide students with a pre-college experience in STEM (Science, Technology, Engineering, and Math).
+      <br /><br />
+      Competing in the FIRST Robotics Competition as <span class="mb-1  font-bold text-blue-600">Team 5016</span>,
+      Huntington Robotics offers an opportunity for all those in the community to experience real-world
+      applications of engineering.  Members are able to build professional skills through exposure to
+      the organization and operations of a business.
+    </Fragment>
+  </Hero>
+
+  <!-- Stats Widget ****************** -->
+
+  <!-- <Stats
+    title="Statistics about us"
+    stats={[
+      { title: 'Offices', amount: '4' },
+      { title: 'Employees', amount: '248' },
+      { title: 'Templates', amount: '12' },
+      { title: 'Awards', amount: '24' },
+    ]}
+  /> -->
+
+  <GalleryIndex
+    title="Gallery"    
+  />
+
+
+
+</Layout>

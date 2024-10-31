@@ -1,0 +1,6 @@
+User-Agent: Amazonbot
+Disallow: /
+
+User-Agent: *
+Disallow: /assets/images
+Disallow: /content/albums

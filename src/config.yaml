@@ -1,0 +1,72 @@
+site:
+  name: Huntington Robotics
+  site: 'https://team5016.com'
+  base: '/'
+  trailingSlash: false
+
+  # googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+
+# Default SEO metadata
+metadata:
+  title:
+    default: Huntington Robotics - Team 5016
+    template: '%s — Huntington Robotics'
+  description: "Huntington Robotics is FIRST Team 5016, and is based out of Huntington High School in Huntington, New York. A completely student-run organization, Huntington Robotics operates based on the ideals of professionalism and making engineering opportunities available for all students."
+  robots:
+    index: true
+    follow: false
+  openGraph:
+    site_name: HuntingtonTeam5016
+    images:
+      - url: 'https://opengraph.b-cdn.net/production/images/0dc2160e-29a5-4c22-bf5a-d6c97c6d5c84.png?token=aLt9NxoW9uI3MYf9yQSAj8W09zHufekWkGpmqwGYs08&height=630&width=1200&expires=33263053237'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@onwidget'
+    site: '@onwidget'
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: true
+    postsPerPage: 6
+
+    post:
+      isEnabled: true
+      permalink: '/blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      robots:
+        index: true
+
+    list:
+      isEnabled: true
+      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
+      robots:
+        index: true
+
+    category:
+      isEnabled: false
+      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
+      robots:
+        index: true
+
+    tag:
+      isEnabled: false
+      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: false
+    relatedPostsCount: 4
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+
+ui:
+  theme: 'dark' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
