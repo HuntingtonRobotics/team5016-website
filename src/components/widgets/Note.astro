@@ -4,10 +4,12 @@ import { getPermalink } from '~/utils/permalinks';
 ---
 
 <section class="bg-blue-50 dark:bg-slate-800 not-prose">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-md text-center font-medium">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-lg text-center font-medium">
+    <Icon name="tabler:info-square" class="w-5 h-5 inline-block align-text-bottom" />
+    Fundraiser on December 12 at 7pm
+    <br>
     <span class="font-bold">
-      <Icon name="tabler:info-square" class="w-5 h-5 inline-block align-text-bottom" />
-      <a href={getPermalink('/blog/fall-fundraiser-2024')}>Fundraiser on December 12 at 7pm</a>
+    <a class="hover:underline" href={getPermalink('/blog/fall-fundraiser-2024')}>Purchase tickets now!</a>
     </span>
   </div>
 </section>
