@@ -73,18 +73,7 @@ const albums = defineCollection({
     }),
 });
 
-const albumImages = defineCollection({
-  type: "data",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      src: image(),
-    }),
-});
-
 export const collections = {
   post: postCollection,
-  albums,
-  albumImages
+  albums
 };

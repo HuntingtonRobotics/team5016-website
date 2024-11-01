@@ -1,0 +1,15 @@
+---
+import Gallery from "~/components/Gallery.astro";
+import Layout from "~/layouts/Layout.astro";
+
+const metadata = {
+  title: 'Competitions',
+};
+---
+<Layout metadata={metadata}>
+    <Gallery
+      title="Competitions"
+      subtitle="Team 5016 at work"
+      imageFolder="gallery/competitions"
+    />
+</Layout>

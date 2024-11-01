@@ -1,0 +1,75 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+import WidgetWrapper from './ui/WidgetWrapper.astro';
+import Headline from './ui/Headline.astro';
+import type { Headline as HeadlineProps, Widget } from '~/types';
+
+interface Props extends Omit<HeadlineProps, 'classes'>, Widget {
+  imageFolder: string;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+
+  imageFolder,
+} = Astro.props;
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*/**');
+const imagePaths = Object.keys(images).filter((imagePath) => {
+  return imagePath.startsWith(`/src/assets/images/${imageFolder}/`);
+});
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+
+  <div id="gallery" class="container mx-auto px-2 pb-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
+    {
+      imagePaths.map(async (imagePath) => {
+        let image = images[imagePath]();
+        let optimizedImage = await getImage({
+          src: image,
+          width: 1920,
+        });
+
+        return (
+          <a
+            href={optimizedImage.src}
+            data-pswp-width={optimizedImage.attributes.width}
+            data-pswp-height={optimizedImage.attributes.height}
+            target="_blank"
+            class="overflow-hidden rounded-md border-[2px] border-blue-900 hover:border-blue-300"
+          >
+            <Image
+              src={image}
+              alt={'altText'}
+              height={350}
+              class={
+                'object-cover w-full transition duration-300 ease-in-out aspect-[3/2]'
+              }
+            />
+          </a>
+        );
+      })
+    }
+  </div>
+</WidgetWrapper>
+
+<script>
+  import PhotoSwipeLightbox from 'photoswipe/lightbox';
+  import 'photoswipe/style.css';
+
+  const lightbox = new PhotoSwipeLightbox({
+    gallery: '#gallery',
+    children: 'a',
+    pswpModule: () => import('photoswipe'),
+  });
+
+  lightbox.init();
+</script>
