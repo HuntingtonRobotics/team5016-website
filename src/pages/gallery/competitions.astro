@@ -1,6 +1,6 @@
 ---
-import Gallery from "~/components/Gallery.astro";
-import Layout from "~/layouts/Layout.astro";
+import Gallery from '~/components/Gallery.astro';
+import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
   title: 'Competitions',
@@ -9,7 +9,8 @@ const metadata = {
 <Layout metadata={metadata}>
     <Gallery
       title="Competitions"
-      subtitle="Team 5016 at work"
+      subtitle="Team 5016 in action"
+      collection='competitions'
       imageFolder="gallery/competitions"
     />
 </Layout>

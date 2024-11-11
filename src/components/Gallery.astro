@@ -4,8 +4,11 @@ import { Image, getImage } from 'astro:assets';
 import WidgetWrapper from './ui/WidgetWrapper.astro';
 import Headline from './ui/Headline.astro';
 import type { Headline as HeadlineProps, Widget } from '~/types';
+import { getEntry } from 'astro:content';
+import path from 'path';
 
 interface Props extends Omit<HeadlineProps, 'classes'>, Widget {
+  collection: string;
   imageFolder: string;
 }
 
@@ -19,11 +22,14 @@ const {
   bg = await Astro.slots.render('bg'),
 
   imageFolder,
+  collection
 } = Astro.props;
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/*/**');
 const imagePaths = Object.keys(images).filter((imagePath) => {
   return imagePath.startsWith(`/src/assets/images/${imageFolder}/`);
 });
+
+const albumImages = await getEntry('albums', collection);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -31,8 +37,9 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
 
   <div id="gallery" class="container mx-auto px-2 pb-2 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3">
     {
-      imagePaths.map(async (imagePath) => {
-        let image = images[imagePath]();
+      albumImages?.data.map(async (imgMeta) => {
+        let imageIdx = imagePaths.find(i => path.basename(i) == imgMeta.src) ?? "";
+        let image = images[imageIdx]();
         let optimizedImage = await getImage({
           src: image,
           width: 1920,
@@ -48,7 +55,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
           >
             <Image
               src={image}
-              alt={'altText'}
+              alt={imgMeta.alt}
               height={350}
               class={
                 'object-cover w-full transition duration-300 ease-in-out aspect-[3/2]'
@@ -65,11 +72,61 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
   import PhotoSwipeLightbox from 'photoswipe/lightbox';
   import 'photoswipe/style.css';
 
-  const lightbox = new PhotoSwipeLightbox({
+  const options = {
     gallery: '#gallery',
     children: 'a',
     pswpModule: () => import('photoswipe'),
+  };
+  const lightbox = new PhotoSwipeLightbox(options);
+  lightbox.on('uiRegister', function() {
+    lightbox.pswp?.ui?.registerElement({
+    name: 'custom-caption',
+    order: 9,
+    isButton: false,
+    appendTo: 'root',
+    html: 'Caption text',
+    onInit: (el, pswp) => {
+      pswp.on('change', () => {
+        const currSlideElement = lightbox.pswp?.currSlide?.data.element;
+        let captionHTML = '';
+        if (currSlideElement) {
+          const hiddenCaption = currSlideElement.querySelector('.hidden-caption-content');
+          if (hiddenCaption) {
+            captionHTML = hiddenCaption.innerHTML;
+          }
+          else {
+            captionHTML = currSlideElement.querySelector('img')?.getAttribute('alt') || '';
+          }
+
+          el.innerHTML = captionHTML;
+        }
+      });
+    }
   });
+});
 
   lightbox.init();
 </script>
+
+<style is:global>
+  .pswp__custom-caption {
+  background: rgba(26, 175, 245, 0.75);
+  font-size: 20px;
+  color: #fff;
+  width: calc(100% - 32px);
+  max-width: 800px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  bottom: 32px;
+  transform: translateX(-50%);
+}
+.pswp__custom-caption a {
+  color: #fff;
+  text-decoration: underline;
+}
+.hidden-caption-content {
+  display: none;
+}
+</style>

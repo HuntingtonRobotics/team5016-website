@@ -63,17 +63,29 @@ const postCollection = defineCollection({
   }),
 });
 
-const albums = defineCollection({
+const albumIndex = defineCollection({
   type: "data",
   schema: ({ image }) =>
     z.object({
       title: z.string(),
       description: z.string().optional(),
+      permalink: z.string(),
       cover: image(),
     }),
 });
 
+const albums = defineCollection({
+  type: "data",
+  schema: z.array(
+    z.object({
+      src: z.string(),
+      title: z.string(),
+      alt: z.string(),
+    })),
+});
+
 export const collections = {
   post: postCollection,
-  albums
+  'albumIndex': albumIndex,
+  'albums': albums
 };

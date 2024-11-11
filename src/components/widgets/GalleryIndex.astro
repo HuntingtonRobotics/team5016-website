@@ -21,7 +21,7 @@ const {
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
-const albums = await getCollection('albums');
+const albums = await getCollection('albumIndex');
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -30,7 +30,7 @@ const albums = await getCollection('albums');
   <div class="mx-auto container max-w-screen-sm grid grid-cols-2 gap-8">
     {
       albums.map((item) => (
-        <a href={getPermalink('/gallery/competitions')} class="group transition-all mb-4 block">
+        <a href={getPermalink(item.data.permalink)} class="group transition-all mb-4 block">
           <div class="text-center relative flex flex-col intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
             <Image
               src={item.data.cover}
