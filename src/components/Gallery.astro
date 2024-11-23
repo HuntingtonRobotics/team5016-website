@@ -29,7 +29,7 @@ const imagePaths = Object.keys(images).filter((imagePath) => {
   return imagePath.startsWith(`/src/assets/images/${imageFolder}/`);
 });
 
-const albumImages = await getEntry('albums', collection);
+const albumImages = await getEntry('album', collection);
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>

@@ -74,7 +74,7 @@ const albumIndex = defineCollection({
     }),
 });
 
-const albums = defineCollection({
+const albumCollection = defineCollection({
   type: "data",
   schema: z.array(
     z.object({
@@ -84,8 +84,19 @@ const albums = defineCollection({
     })),
 });
 
+const videoCollection = defineCollection({
+  type: "data",
+  schema: z.array(
+    z.object({
+      videoId: z.string(),
+      title: z.string(),
+      description: z.string(),
+    })),
+});
+
 export const collections = {
   post: postCollection,
   'albumIndex': albumIndex,
-  'albums': albums
+  'album': albumCollection,
+  'video': videoCollection
 };

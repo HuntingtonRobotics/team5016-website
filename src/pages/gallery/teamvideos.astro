@@ -1,0 +1,15 @@
+---
+import Gallery from '~/components/VideoGallery.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Team Videos',
+};
+---
+<Layout metadata={metadata}>
+    <Gallery
+      title="Team Videos"
+      subtitle="Robot reveals, competition entries and other team-related videos"
+      collection='teamvideos'
+    />
+</Layout>
