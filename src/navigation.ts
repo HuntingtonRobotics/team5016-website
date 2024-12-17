@@ -17,7 +17,7 @@ export const headerData = {
     // },
     {
       text: 'Upcoming Events',
-      href: getPermalink('/blog/fall-fundraiser-2024'),
+      href: getPermalink('/blog/2025/frc-kickoff'),
     },
     {
       text: 'Blog',
