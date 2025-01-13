@@ -15,10 +15,10 @@ export const headerData = {
     //     },
     //   ],
     // },
-    {
-      text: 'Upcoming Events',
-      href: getPermalink('/blog/2025/frc-kickoff'),
-    },
+    // {
+    //   text: 'Upcoming Events',
+    //   href: getPermalink('/blog/2025/frc-kickoff'),
+    // },
     {
       text: 'Blog',
       href: getBlogPermalink(),
