@@ -6,7 +6,7 @@ image: ~/assets/images/blog/left-24b.jpg
 # tags:
 #  - 
 metadata:
-  canonical: https://team5016.com/blog/new-competitive-season
+  canonical: https://team5016.com/blog/2024/new-competitive-season
 ---
 
 The Blue Devil technological wizards are led by team captain Jaipreet Singh, vice-captain Oliver Gerberg and chief of business operations Jordana Boxer. Omar Santiago serves as the organization’s faculty advisor.

@@ -6,7 +6,7 @@ image: ~/assets/images/blog/aaron-burden-V1dae2Jj6-0-unsplash.jpg
 # tags:
 #  - 
 metadata:
-  canonical: https://team5016.com/blog/fall-fundraiser-2024
+  canonical: https://team5016.com/blog/2024/fall-fundraiser-2024
 ---
 
 The Huntington Robotics fall fundraiser will take place on **December 12th at 7pm**, at 1 Mill Dam Road in Huntington (Formal attire).
