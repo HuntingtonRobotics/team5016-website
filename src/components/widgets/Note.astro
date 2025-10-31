@@ -1,17 +1,22 @@
 ---
 import { Icon } from 'astro-icon/components';
 // import { getPermalink } from '~/utils/permalinks';
+const {
+  line1 = '',
+  line2 = '',
+  line3 = ''
+} = Astro.props;
 ---
 
 <section class="bg-blue-50 dark:bg-slate-800 not-prose">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-2xl text-center font-medium">
     <Icon name="tabler:confetti" class="w-7 h-7 inline-block align-text-bottom" />
     <span class="font-bold">
-      End-of-Year Dinner 
+      {line1} 
       <br>
-      May 30th 6-8pm
+      {line2}
       <br>
-      Invite to Follow
+      {line3}
     </span>
     <!-- <a class="hover:underline" href='/blog/2025/hudson-regional-finals'>Team 5016 reach Finals at Hudson Valley Regional!</a> -->
     <!-- <br>
