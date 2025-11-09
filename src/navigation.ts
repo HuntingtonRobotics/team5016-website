@@ -28,7 +28,7 @@ export const headerData = {
       href: getPermalink('/about'),
     },
   ],
-  actions: [{ text: 'Donate', href: 'https://donorbox.org/huntington-robotics-online-donations', target: '_blank' }],
+  actions: [{ text: 'Donate', href: 'https://gofund.me/e4d9db2fa', target: '_blank' }],
 };
 
 export const footerData = {
