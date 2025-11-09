@@ -1,27 +1,29 @@
 ---
 import { Icon } from 'astro-icon/components';
-// import { getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  icon?: string;
+  title?: string;
+  description?: string;
+  link?: string
+}
+
 const {
-  line1 = '',
-  line2 = '',
-  line3 = ''
+  icon = 'tabler:info-square',
+  title = await Astro.slots.render('title'),
+  description = await Astro.slots.render('description'),
+  link = await Astro.slots.render('link')
 } = Astro.props;
 ---
 
 <section class="bg-blue-50 dark:bg-slate-800 not-prose">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-2xl text-center font-medium">
-    <Icon name="tabler:confetti" class="w-7 h-7 inline-block align-text-bottom" />
-    <span class="font-bold">
-      {line1} 
-      <br>
-      {line2}
-      <br>
-      {line3}
-    </span>
-    <!-- <a class="hover:underline" href='/blog/2025/hudson-regional-finals'>Team 5016 reach Finals at Hudson Valley Regional!</a> -->
-    <!-- <br>
-    <span class="font-bold">
-    <a class="hover:underline" href='https://www.nysfirst.org/hudson-valley'>More Info</a>
-    </span> -->
+    <Icon name={icon} class="w-7 h-7 inline-block align-text-bottom font-bold" />
+    <span class="font-bold" set:html={title} />
+    <br />
+    <Fragment set:html={description} />
+    <br />
+    {link && <Fragment set:html={link} />}
   </div>
 </section>
+
