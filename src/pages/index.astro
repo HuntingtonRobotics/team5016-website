@@ -1,4 +1,4 @@
----
+astro---
 import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
@@ -16,20 +16,50 @@ const metadata = {
 };
 ---
 
+<script>
+  function setupScrollLinks() {
+    const donateLinks = document.querySelectorAll('a[href="#donate-section"]');
+    
+    donateLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const target = document.getElementById('donate-section');
+        if (target) {
+          target.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center'
+          });
+        }
+        
+        return false;
+      });
+    });
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupScrollLinks);
+  } else {
+    setupScrollLinks();
+  }
+  
+  document.addEventListener('astro:page-load', setupScrollLinks);
+</script>
+
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Join Us',
-        href: 'mailto:huntingtonrobotics@gmail.com',
-        target: '_blank',
-        icon: 'tabler:thumb-up',
-      },
-      { text: 'Learn more', href: getPermalink('/about') },
-    ]}
+  actions={[
+    {
+      variant: 'primary',
+      text: 'Donate',
+      href: '#donate-section',  
+      icon: 'tabler:thumb-up',
+    },
+    { text: 'Learn more', href: getPermalink('/about') },
+  ]}
     image={{ src: '~/assets/images/profile.png', alt: 'Huntington Robotics Logo' }}
     imageLight={{ src: '~/assets/images/profile.png', alt: 'Huntington Robotics Logo' }}
   >
@@ -49,8 +79,8 @@ const metadata = {
   <!-- Note Widget ******************* -->
 
   <Note
-    title="Season Kickoff!"
-    description="January 10th, 12-3pm at Huntington High School Auditorium"
+    title="Hofstra Regional"
+    description="March 19-20 10am-4pm to see Huntington Robotics compete at an frc competition."
   >
     <!-- <a class="hover:underline" target="_blank" href='https://forms.gle/wpEbSxZhqY5yPoA4A' slot="link">RSVP</a>" -->
   </Note>
@@ -217,23 +247,17 @@ const metadata = {
   <!-- CallToAction Widget *********** -->
 
   <CallToAction
+    id="donate-section"
+    title="Support Our Team"
+    subtitle="Your donation helps us continue to inspire the next generation of engineers and leaders. If you wish to donate through check in the mail out address is PO box 1635 Huntington Ny 17743"
     actions={[
       {
         variant: 'primary',
         text: 'Donate Now',
         href: 'https://donorbox.org/huntington-robotics-online-donations',
         target: '_blank',
-        icon: '',
       },
     ]}
-  >
-    <Fragment slot="title">
-      Support Future Engineers
-    </Fragment>
+  />
 
-    <Fragment slot="subtitle">
-      Your donations are used to pay for materials, travel and competitions. <br class="hidden md:inline" />
-      Thank you for your support!
-    </Fragment>
-  </CallToAction>
 </Layout>
