@@ -4,6 +4,8 @@ import { Icon } from 'astro-icon/components';
 export interface Props {
   icon?: string;
   title?: string;
+  subtitle?: string;
+  subtitleColor?: string;
   description?: string;
   link?: string
 }
@@ -11,6 +13,8 @@ export interface Props {
 const {
   icon = 'tabler:info-square',
   title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  subtitleColor = await Astro.slots.render('subtitleColor'),
   description = await Astro.slots.render('description'),
   link = await Astro.slots.render('link')
 } = Astro.props;
@@ -21,6 +25,9 @@ const {
     <Icon name={icon} class="w-7 h-7 inline-block align-text-bottom font-bold" />
     <span class="font-bold" set:html={title} />
     <br />
+    { subtitle && <Fragment class="" set:html={subtitle} /> 
+      <br />
+    }
     <Fragment set:html={description} />
     <br />
     {link && <Fragment set:html={link} />}
