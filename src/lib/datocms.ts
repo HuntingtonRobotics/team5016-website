@@ -1,9 +1,10 @@
-import type { PaginateFunction } from 'astro';
+type scriptimport type { PaginateFunction } from 'astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { Post } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import { executeQuery } from '~/lib/datocms';
 
 const generatePermalink = async ({
   id,
@@ -57,7 +58,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     metadata = {},
   } = data;
 
-  const slug = cleanSlug(rawSlug); // cleanSlug(rawSlug.split('/').pop());
+  const slug = cleanSlug(rawSlug);
   const publishDate = new Date(rawPublishDate);
   const updateDate = rawUpdateDate ? new Date(rawUpdateDate) : undefined;
 
@@ -94,34 +95,23 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     metadata,
 
     Content: Content,
-    // or 'content' in case you consume from API
 
     readingTime: remarkPluginFrontmatter?.readingTime,
   };
 };
 
-import { executeQuery } from '~/lib/datocms';
-
-// ... keep all your existing imports and functions above ...
-
 const load = async function (): Promise<Array<Post>> {
   // Fetch posts from DatoCMS
   const data = await executeQuery(`
     query {
-      allPosts(orderBy: publishDate_DESC) {
+      allPosts(orderBy: posted_DESC) {
         id
-        slug
         title
-        excerpt
-        publishDate
-        updateDate
-        image {
+        posted
+        coverimage {
           url
         }
-        category
-        tags
-        author
-        draft
+        body
       }
     }
   `);
@@ -131,21 +121,14 @@ const load = async function (): Promise<Array<Post>> {
   // Transform DatoCMS data to match your Post type
   const normalizedPosts = await Promise.all(
     posts.map(async (post: any) => {
-      const publishDate = new Date(post.publishDate);
-      const updateDate = post.updateDate ? new Date(post.updateDate) : undefined;
-      const slug = cleanSlug(post.slug);
+      const publishDate = new Date(post.posted);
+      // Generate slug from title
+      const slug = cleanSlug(post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
       
-      const category = post.category
-        ? {
-            slug: cleanSlug(post.category),
-            title: post.category,
-          }
-        : undefined;
-
-      const tags = (post.tags || []).map((tag: string) => ({
-        slug: cleanSlug(tag),
-        title: tag,
-      }));
+      // Create excerpt from body (first 200 characters)
+      const excerpt = post.body 
+        ? post.body.replace(/<[^>]*>/g, '').substring(0, 200) + '...' 
+        : '';
 
       return {
         id: post.id,
@@ -154,28 +137,26 @@ const load = async function (): Promise<Array<Post>> {
           id: post.id, 
           slug, 
           publishDate, 
-          category: category?.slug 
+          category: undefined 
         }),
         publishDate: publishDate,
-        updateDate: updateDate,
+        updateDate: undefined,
         title: post.title,
-        excerpt: post.excerpt,
-        image: post.image?.url,
-        category: category,
-        tags: tags,
-        author: post.author,
-        draft: post.draft || false,
+        excerpt: excerpt,
+        image: post.coverimage?.url,
+        category: undefined,
+        tags: [],
+        author: undefined,
+        draft: false,
         metadata: {},
-        Content: null, // Will be fetched separately for individual posts
+        Content: null,
         readingTime: undefined,
       };
     })
   );
 
-  return normalizedPosts.filter((post) => !post.draft);
+  return normalizedPosts;
 };
-
-// ... keep all your existing exports below ...
 
 let _posts: Array<Post>;
 
