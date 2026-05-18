@@ -1,7 +1,7 @@
 ---
 publishDate: 2026-3-25T3:30:09Z
 title: 'Great days at Hofstra'
-excerpt: Hofstra had its ups and downs but we ended up in a great place.
+excerpt: Huntington Robotics won the sustainablity award at Hofstra.
 image: ~/assets/images/blog/Hofstra.jpg
 # tags:
 #  - 7
@@ -9,10 +9,9 @@ metadata:
   canonical: https://team5016.com/blog/2026/Hoffstra
 ---
 
-Team 5016 had its first competition of the year at Hofstra university. During the practice day things were going well until our intake broke leaving us doing bad for the practice matches. We worked that night to get the intake back up and running and by the start of day 2. The second day was rocky with many losses but the intake worked, until on one auto period we ran our autonomous code and it bashed into a wall destroying our intake. We were out of our next 2 matches fixing but we got back up again for our last match. 
-
-We ended up in 46th place going into playoffs feeling defeated. We waited during alliance selection and we were astonished to see our name picked by the Hixville J-birds as their second pick in the 8th alliance. We talked with them and got our gameplan ready for our hardest match against the Kingsmen of kings park. We ended up losing and moving to the loser bracket. We were feeling defeated again but we miraculously won the next 2 matches moving far forward in the loser bracket. We went into our fourth match feeling good but we sadly lost.
-
-This was the end of our play-off run leaving us in 4th place. We watched and waited for awards in the stands after that. After we watched the kingsmen win the first finals match we saw an award go on screen; The sustanability award. They sarted to speak about the team that won "100% increase in team size, and had an entire FLL team join them" we  finally heard the words "HUNTINGTON ROBOTICS won the sustanability award." our chief of business Jordana was extatic as we sat up and ran to the front of the stage to accept our award.
-
-After the rocky first days we ended up in a great place. We plan on taking this momentum to Albany and hope to do great there.
+Team 5016 competed at their first event of the season at Hofstra University, facing some early challenges that the team quickly overcame. During practice day, a broken intake temporarily set them back, but the team worked through the night to get back to full functionality by the start of competition day.
+Day two brought its share of obstacles including an autonomous routine that unexpectedly collided with a field element, taking out the intake again mid competition. The team made repairs and returned to the field, finishing qualification rounds in 46th place.
+Alliance selection turned the day around. Team 5016 was chosen by the Hixville J-Birds as their second pick for their alliance. The team strategized with their alliance partners and competed hard through the playoff bracket, ultimately finishing in 4th place after a strong run.
+The highlight of the day came during the awards ceremony. Team 5016 was recognized with the Sustainability Award, with judges citing a 100% increase in team size and the addition of a full FLL team. Chief of Business Jordana led the team to the stage to accept the honor.
+With a playoff finish and a regional award in hand, Team 5016 heads into the Albany competition with strong momentum.
+Author: Claude Wagner
